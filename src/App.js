@@ -1,5 +1,6 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import { Button } from '@material-ui/core'
+import './App.css'
 
 const monsters = [
   {
@@ -858,8 +859,11 @@ const items = [
 ]
 
 function App() {
+  const [selectedMonsters, setSelectedMonsters] = useState([1,2])
   return (
     <div className="App">
+      <Button variant="contained">Get Cards!</Button>
+      {selectedMonsters.map(selected=><div>body</div>)}
     </div>
   );
 }
