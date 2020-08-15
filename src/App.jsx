@@ -5,6 +5,7 @@ import {
   monsters, locations,
 } from './utils';
 
+// Fisher-Yates
 const collect = (list) => {
   // eslint-disable-next-line no-plusplus
   for (let i = list.length - 1; i > 0; i--) {
