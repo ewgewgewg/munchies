@@ -36,12 +36,115 @@ function App() {
   const [eventsDeck, setEventsDeck] = useState(shuffle(events));
   const [mutationsDeck, setMutationsDeck] = useState(shuffle(mutations));
   const [victimsDeck, setVictimsDeck] = useState(shuffle(victims));
-
   const [originalDecks, setOriginalDecks] = useState(false);
+
+  const [characters, setCharacters] = useState([]);
+
+  const [Alaric, setAlaric] = useState({});
+  const [Brianne, setBrianne] = useState({});
+  const [Claudias, setClaudias] = useState({});
+  const [Demeter, setDemeter] = useState({});
+
+  const distributeCharacters = (yourC) => {
+    setAlaric({ ...Alaric, character: yourC });
+    const shuffledCharacters = shuffle(
+      characters.filter((char) => char.name !== yourC.name),
+    );
+    // eslint-disable-next-line prefer-destructuring
+    setBrianne({ ...Brianne, character: shuffledCharacters[0] });
+    // eslint-disable-next-line prefer-destructuring
+    setClaudias({ ...Claudias, character: shuffledCharacters[1] });
+    // eslint-disable-next-line prefer-destructuring
+    setDemeter({ ...Demeter, character: shuffledCharacters[2] });
+  };
+
+  const characterStats = (theC) => (
+    <div>
+      <div>{theC.character.name}</div>
+      {theC.character.strength && (
+        <div>
+          Strength:
+          {' '}
+          {theC.character.strength}
+        </div>
+      )}
+      {theC.character.guts && (
+        <div>
+          Guts:
+          {' '}
+          {theC.character.guts}
+        </div>
+      )}
+      {theC.character.luck && (
+        <div>
+          Luck:
+          {' '}
+          {theC.character.luck}
+        </div>
+      )}
+      {theC.character.speed && (
+        <div>
+          Speed:
+          {' '}
+          {theC.character.speed}
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <div className="App">
-      <Button variant="contained" onClick={() => setOriginalDecks(!originalDecks)}>Show version 0.1</Button>
+      {!Alaric.character ? (
+        <>
+          {!characters.length ? (
+            <Button
+              variant="contained"
+              onClick={() => {
+                setCharacters(victimsDeck.slice(0, 4));
+                setVictimsDeck(victimsDeck.slice(4));
+              }}
+            >
+              Draw 4 Characters
+            </Button>
+          ) : <div>Click to Select a Character</div>}
+          {characters.map((character) => (
+            <Button onClick={() => distributeCharacters(character)}>
+              {character.name}
+            </Button>
+          ))}
+        </>
+      ) : null}
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <div>
+          <div>Alaric (You)</div>
+          <div>
+            {Alaric && Alaric.character && characterStats(Alaric)}
+          </div>
+        </div>
+        <div>
+          <div>Brianne</div>
+          <div>{Brianne && Brianne.character && characterStats(Brianne)}</div>
+        </div>
+        <div>
+          <div>Claudias</div>
+          <div>{Claudias && Claudias.character && characterStats(Claudias)}</div>
+        </div>
+        <div>
+          <div>Demeter</div>
+          <div>{Demeter && Demeter.character && characterStats(Demeter)}</div>
+        </div>
+      </div>
+      <br />
+      <div>***</div>
+      <Button
+        variant="contained"
+        onClick={() => setOriginalDecks(!originalDecks)}
+      >
+        {originalDecks ? 'Hide' : 'Show'}
+        {' '}
+        version 0.1
+
+      </Button>
       <br />
       {originalDecks ? (
         <>
