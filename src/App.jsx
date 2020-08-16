@@ -62,32 +62,32 @@ function App() {
     <div>
       <div>{theC.character.name}</div>
       {theC.character.strength && (
-        <div>
-          Strength:
+      <div>
+        Strength:
           {' '}
-          {theC.character.strength}
-        </div>
+        {theC.character.strength}
+      </div>
       )}
       {theC.character.guts && (
-        <div>
-          Guts:
+      <div>
+        Guts:
           {' '}
-          {theC.character.guts}
-        </div>
+        {theC.character.guts}
+      </div>
       )}
       {theC.character.luck && (
-        <div>
-          Luck:
+      <div>
+        Luck:
           {' '}
-          {theC.character.luck}
-        </div>
+        {theC.character.luck}
+      </div>
       )}
       {theC.character.speed && (
-        <div>
-          Speed:
+      <div>
+        Speed:
           {' '}
-          {theC.character.speed}
-        </div>
+        {theC.character.speed}
+      </div>
       )}
     </div>
   );
@@ -118,20 +118,20 @@ function App() {
         <div>
           <div>Alaric (You)</div>
           <div>
-            {Alaric && Alaric.character && characterStats(Alaric)}
+            {Alaric.character && characterStats(Alaric)}
           </div>
         </div>
         <div>
           <div>Brianne</div>
-          <div>{Brianne && Brianne.character && characterStats(Brianne)}</div>
+          <div>{Brianne.character && characterStats(Brianne)}</div>
         </div>
         <div>
           <div>Claudias</div>
-          <div>{Claudias && Claudias.character && characterStats(Claudias)}</div>
+          <div>{Claudias.character && characterStats(Claudias)}</div>
         </div>
         <div>
           <div>Demeter</div>
-          <div>{Demeter && Demeter.character && characterStats(Demeter)}</div>
+          <div>{Demeter.character && characterStats(Demeter)}</div>
         </div>
       </div>
       <br />
