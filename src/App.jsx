@@ -46,12 +46,16 @@ function App() {
 
   const [characters, setCharacters] = useState([]);
 
-  const [Alaric, setAlaric] = useState({});
-  const [Brianne, setBrianne] = useState({});
-  const [Claudias, setClaudias] = useState({});
-  const [Demeter, setDemeter] = useState({});
+  const [Alaric, setAlaric] = useState({ hand: [] });
+  const [Brianne, setBrianne] = useState({ hand: [] });
+  const [Claudias, setClaudias] = useState({ hand: [] });
+  const [Demeter, setDemeter] = useState({ hand: [] });
 
   const [drawPhase, setDrawPhase] = useState(true);
+  const [locationFixed, setLocationFixed] = useState(false);
+  const [draft, setDraft] = useState([]);
+  const [lostVictims, setLostVictims] = useState([]);
+  const [activeMonsters, setActiveMonsters] = useState([]);
 
   const distributeCharacters = (yourC) => {
     setAlaric({ ...Alaric, character: yourC });
@@ -99,6 +103,30 @@ function App() {
       )}
     </div>
   );
+
+  const drafting = (char, setChar, draftee) => {
+    if (draftee.type === 'mutation') {
+      const tempMutations = { ...char.mutations, draftee };
+      console.log('char: ', char.character, draftee);
+      const tempStrength = (char.character.strength || 0)
+       + (draftee.strength || 0);
+      const tempSpeed = (char.character.speed || 0)
+      + (draftee.speed || 0);
+      const tempGuts = (char.character.guts || 0) + (draftee.guts || 0);
+      const tempLuck = (char.character.luck || 0) + (draftee.luck || 0);
+      const tempCharacter = {
+        ...char.character,
+        strength: tempStrength,
+        speed: tempSpeed,
+        guts: tempGuts,
+        luck: tempLuck,
+      };
+      setChar({ ...char, mutations: tempMutations, character: tempCharacter });
+    } else {
+      const tempHand = [...char.hand, draftee];
+      setChar({ ...char, hand: tempHand });
+    }
+  };
 
   return (
     <div className="App">
@@ -159,13 +187,31 @@ function App() {
           </Button>
           {selectedLocations.length
             ? selectedLocations.map((selected) => (
-              <Button onClick={() => {
-                // selecting location!
-                setDiscardedLocations(selectedLocations.filter(
-                  (sel) => sel.name !== selected.name,
-                ));
-                setSelectedLocations([selected]);
-              }}
+              <Button
+                onClick={() => {
+                  // selecting location!
+                  setDiscardedLocations(selectedLocations.filter(
+                    (sel) => sel.name !== selected.name,
+                  ));
+                  setSelectedLocations([selected]);
+
+                  setDraft([...itemsDeck.slice(0, selected.items),
+                    ...mutationsDeck.slice(0, selected.mutations),
+                    ...eventsDeck.slice(0, selected.events)]);
+                  setLostVictims([...lostVictims, ...victimsDeck.slice(0, selected.victims)]);
+                  setActiveMonsters([
+                    ...activeMonsters,
+                    ...monstersDeck.slice(0, selected.monsters),
+                  ]);
+
+                  setItemsDeck(itemsDeck.slice(selected.items));
+                  setMonstersDeck(monstersDeck.slice(selected.monsters));
+                  setVictimsDeck(victimsDeck.slice(selected.victims));
+                  setEventsDeck(eventsDeck.slice(selected.events));
+                  setMutationsDeck(mutationsDeck.slice(selected.mutations));
+                  setLocationFixed(true);
+                }}
+                disabled={locationFixed}
               >
                 <div style={{ fontWeight: 'bold' }}>{selected.name}</div>
                 <list>
@@ -189,10 +235,47 @@ function App() {
                     {' '}
                     {selected.victims}
                   </li>
+                  <li>
+                    Mutations:
+                    {' '}
+                    {selected.mutations}
+                  </li>
                 </list>
               </Button>
             ))
             : <div>No cards</div>}
+        </>
+      ) : null}
+      {draft.length ? (
+        <>
+          <div style={{ fontWeight: 'bold' }}>Draft</div>
+          {draft.map((draftee) => (
+            <>
+              <Button onClick={() => {
+                drafting(Alaric, setAlaric, draftee);
+                setDraft(draft.filter((filtered) => filtered.name !== draftee.name));
+              }}
+              >
+                {draftee.name}
+                {' '}
+                (
+                {draftee.type}
+                )
+              </Button>
+            </>
+          ))}
+        </>
+      ) : null}
+      {lostVictims.length ? (
+        <>
+          <div style={{ fontWeight: 'bold' }}>Lost Victims</div>
+          {lostVictims.map((draftee) => <><div>{draftee.name}</div></>)}
+        </>
+      ) : null}
+      {activeMonsters.length ? (
+        <>
+          <div style={{ fontWeight: 'bold' }}>Active Monsters</div>
+          {activeMonsters.map((draftee) => <><div>{draftee.name}</div></>)}
         </>
       ) : null}
       <br />

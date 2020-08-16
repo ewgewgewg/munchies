@@ -6,6 +6,7 @@ const locations = [
     events: 0,
     monsters: 0,
     victims: 2,
+    mutations: 0,
   },
   {
     type: 'location',
@@ -14,14 +15,16 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
     name: 'Forest',
     items: 1,
-    events: 1,
+    events: 0,
     monsters: 2,
     victims: 1,
+    mutations: 2,
   },
   {
     type: 'location',
@@ -30,6 +33,7 @@ const locations = [
     events: 0,
     monsters: 2,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -38,6 +42,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -46,6 +51,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -54,6 +60,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -62,6 +69,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -70,6 +78,7 @@ const locations = [
     events: 0,
     monsters: 3,
     victims: 0,
+    mutations: 2,
   },
   {
     type: 'location',
@@ -78,6 +87,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -86,6 +96,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -94,6 +105,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -102,6 +114,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -110,6 +123,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -118,6 +132,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -126,6 +141,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -134,6 +150,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -142,6 +159,7 @@ const locations = [
     events: 0,
     monsters: 0,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -150,6 +168,7 @@ const locations = [
     events: 0,
     monsters: 0,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -158,6 +177,7 @@ const locations = [
     events: 0,
     monsters: 0,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -166,6 +186,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -174,6 +195,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 2,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -182,6 +204,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -190,6 +213,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 1,
+    mutations: 1,
   },
   {
     type: 'location',
@@ -198,6 +222,7 @@ const locations = [
     events: 0,
     monsters: 1,
     victims: 0,
+    mutations: 1,
   },
 ];
 
