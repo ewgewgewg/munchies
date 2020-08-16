@@ -20,23 +20,29 @@ const shuffle = (list) => {
 };
 
 function App() {
-  const [selectedMonsters, setSelectedMonsters] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
-  const [selectedEvents, setSelectedEvents] = useState([]);
-  const [selectedMutations, setSelectedMutations] = useState([]);
-  const [selectedVictims, setSelectedVictims] = useState([]);
-
-  const [selectedLocations, setSelectedLocations] = useState([]);
-  const [selectedExpandedLocations, setSelectedExpandedLocations] = useState([]);
-
-  // eslint-disable-next-line
   const [monstersDeck, setMonstersDeck] = useState(shuffle(monsters));
   const [itemsDeck, setItemsDeck] = useState(shuffle(items));
   const [locationsDeck, setLocationsDeck] = useState(shuffle(locations));
   const [eventsDeck, setEventsDeck] = useState(shuffle(events));
   const [mutationsDeck, setMutationsDeck] = useState(shuffle(mutations));
   const [victimsDeck, setVictimsDeck] = useState(shuffle(victims));
+
+  const [selectedMonsters, setSelectedMonsters] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedEvents, setSelectedEvents] = useState([]);
+  const [selectedMutations, setSelectedMutations] = useState([]);
+  const [selectedVictims, setSelectedVictims] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
+
+  // const [discardedMonsters, setDiscardedMonsters] = useState([]);
+  // const [discardedItems, setDiscardedItems] = useState([]);
+  // const [discardedEvents, setDiscardedEvents] = useState([]);
+  // const [discardedMutations, setDiscardedMutations] = useState([]);
+  // const [discardedVictims, setDiscardedVictims] = useState([]);
+  const [discardedLocations, setDiscardedLocations] = useState([]);
+
   const [originalDecks, setOriginalDecks] = useState(false);
+  const [selectedExpandedLocations, setSelectedExpandedLocations] = useState([]);
 
   const [characters, setCharacters] = useState([]);
 
@@ -44,6 +50,8 @@ function App() {
   const [Brianne, setBrianne] = useState({});
   const [Claudias, setClaudias] = useState({});
   const [Demeter, setDemeter] = useState({});
+
+  const [drawPhase, setDrawPhase] = useState(true);
 
   const distributeCharacters = (yourC) => {
     setAlaric({ ...Alaric, character: yourC });
@@ -135,6 +143,63 @@ function App() {
         </div>
       </div>
       <br />
+      {Alaric.character ? (
+        <>
+          {' '}
+          <Button
+            disabled={!drawPhase}
+            variant="contained"
+            onClick={() => {
+              setSelectedLocations(locationsDeck.slice(0, 3));
+              setLocationsDeck(locationsDeck.slice(3));
+              setDrawPhase(false);
+            }}
+          >
+            Draw Locations!
+          </Button>
+          {selectedLocations.length
+            ? selectedLocations.map((selected) => (
+              <Button onClick={() => {
+                // selecting location!
+                setDiscardedLocations(selectedLocations.filter(
+                  (sel) => sel.name !== selected.name,
+                ));
+                setSelectedLocations([selected]);
+              }}
+              >
+                <div style={{ fontWeight: 'bold' }}>{selected.name}</div>
+                <list>
+                  <li>
+                    Items:
+                    {' '}
+                    {selected.items}
+                  </li>
+                  <li>
+                    Events:
+                    {' '}
+                    {selected.events}
+                  </li>
+                  <li>
+                    Monsters:
+                    {' '}
+                    {selected.monsters}
+                  </li>
+                  <li>
+                    Victims:
+                    {' '}
+                    {selected.victims}
+                  </li>
+                </list>
+              </Button>
+            ))
+            : <div>No cards</div>}
+        </>
+      ) : null}
+      <br />
+      <div>
+        <div>Discarded Locations: </div>
+        <div>{discardedLocations.map((dis) => <div>{dis.name}</div>)}</div>
+      </div>
       <div>***</div>
       <Button
         variant="contained"
